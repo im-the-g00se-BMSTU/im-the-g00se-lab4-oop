@@ -2,16 +2,16 @@
 #define TRANSFORMMATRIX_H
 
 #include "point3d.h"
-#include "iostream"
-#include "Constants.h"
+#include "constants.h"
+#include <cstddef>
 
 class TransformMatrix {
 private:
     float matr[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE];
 public:
     TransformMatrix(float mat[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE]);
-    TransformMatrix operator*(TransformMatrix& transformMatrix);
-    Point3D TransformPoint(Point3D& point3D);
+    TransformMatrix operator*(const TransformMatrix& transformMatrix) const;
+    Point3D transformPoint(const Point3D& point3D) const;
 };
 
 #endif // TRANSFORMMATRIX_H

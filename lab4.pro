@@ -9,38 +9,31 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    edge.cpp \
     facade.cpp \
-    facadeoperationresult.cpp \
-    figure.cpp \
-    filereader.cpp \
+    file_reader.cpp \
+    qt_scene_drawer.cpp \
+    transform_matrix.cpp \
+    transform_matrix_builder.cpp \
     main.cpp \
-    mainwindow.cpp \
-    normalizationparameters.cpp \
-    point3d.cpp \
-    qtscenedrawer.cpp \
-    scene.cpp \
-    transformmatrix.cpp \
-    transformmatrixbuilder.cpp \
-    vertex.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    basefilereader.h \
+    base_file_reader.h \
     edge.h \
     facade.h \
-    facadeoperationresult.h \
+    facade_operation_result.h \
     figure.h \
-    filereader.h \
-    mainwindow.h \
+    file_reader.h \
     normalizationparameters.h \
     point3d.h \
-    qtscenedrawer.h \
+    qt_scene_drawer.h \
     scene.h \
-    scenedrawerbase.h \
-    sceneobject.h \
-    transformmatrix.h \
-    transformmatrixbuilder.h \
-    vertex.h
+    scene_drawer_base.h \
+    scene_object.h \
+    transform_matrix.h \
+    transform_matrix_builder.h \
+    vertex.h \
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui

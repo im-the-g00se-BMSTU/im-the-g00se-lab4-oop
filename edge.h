@@ -8,9 +8,15 @@ private:
     Vertex begin;
     Vertex end;
 public:
-    Edge(Vertex& vertex1, Vertex& vertex2);
-    Vertex& getBegin();
-    Vertex& getEnd();
+    Edge(const Vertex& vertex1, const Vertex& vertex2) : begin(vertex1), end(vertex2) {}
+
+    Vertex& getBegin() {
+        return begin;
+    }
+
+    Vertex& getEnd() {
+        return end;
+    }
 };
 
 #endif // EDGE_H

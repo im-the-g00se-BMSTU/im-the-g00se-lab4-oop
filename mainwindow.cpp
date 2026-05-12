@@ -1,197 +1,224 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "filereader.h"
-#include "qtscenedrawer.h"
-#include <QFileDialog>
-#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), graphicsScene(new QGraphicsScene(this))
 {
     ui->setupUi(this);
-
     ui->graphicsView->setScene(graphicsScene);
 
     auto reader = std::make_unique<FileReader>();
     auto drawer = std::make_unique<QtSceneDrawer>(graphicsScene);
     facade = std::make_unique<Facade>(std::move(reader), std::move(drawer));
 
-    setupConnections();
+    bindControls();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::setupConnections() {
-    connect(ui->filePushButton, &QPushButton::clicked, this, &MainWindow::onFileButtonClicked);
-    connect(ui->rotateXPlusButton, &QPushButton::clicked,this, &MainWindow::onRotateXPlusClicked);
-    connect(ui->rotateXMinusButton, &QPushButton::clicked,this, &MainWindow::onRotateXMinusClicked);
-    connect(ui->rotateYPlusButton, &QPushButton::clicked,this, &MainWindow::onRotateYPlusClicked);
-    connect(ui->rotateYMinusButton, &QPushButton::clicked,this, &MainWindow::onRotateYMinusClicked);
-    connect(ui->rotateZPlusButton, &QPushButton::clicked,this, &MainWindow::onRotateZPlusClicked);
-    connect(ui->rotateZMinusButton, &QPushButton::clicked,this, &MainWindow::onRotateZMinusClicked);
-    connect(ui->uploadPushButton, &QPushButton::clicked, this, &MainWindow::onLoadButtonClicked);
-    connect(ui->zoomInButton, &QPushButton::clicked, this, &MainWindow::onZoomInClicked);
-    connect(ui->zoomOutButton, &QPushButton::clicked, this, &MainWindow::onZoomOutClicked);
-    connect(ui->translateXPlusButton, &QPushButton::clicked, this, &MainWindow::onTranslateXPlusClicked);
-    connect(ui->translateXMinusButton, &QPushButton::clicked, this, &MainWindow::onTranslateXMinusClicked);
-    connect(ui->translateYPlusButton, &QPushButton::clicked, this, &MainWindow::onTranslateYPlusClicked);
-    connect(ui->translateYMinusButton, &QPushButton::clicked, this, &MainWindow::onTranslateYMinusClicked);
-    connect(ui->translateZPlusButton, &QPushButton::clicked, this, &MainWindow::onTranslateZPlusClicked);
-    connect(ui->translateZMinusButton, &QPushButton::clicked, this, &MainWindow::onTranslateZMinusClicked);
-    connect(ui->exitButton, &QPushButton::clicked, this, &MainWindow::onExitButtonClicked);
+void MainWindow::bindControls() {
+    connect(ui->filePushButton, &QPushButton::clicked, this, &MainWindow::chooseCsvFile);
+    connect(ui->uploadPushButton, &QPushButton::clicked, this, &MainWindow::loadCsvScene);
+    connect(ui->exitButton, &QPushButton::clicked, this, &MainWindow::closeWindow);
+
+    connect(ui->rotateXPlusButton, &QPushButton::clicked, this, &MainWindow::rotateXForward);
+    connect(ui->rotateXMinusButton, &QPushButton::clicked, this, &MainWindow::rotateXBackward);
+    connect(ui->rotateYPlusButton, &QPushButton::clicked, this, &MainWindow::rotateYForward);
+    connect(ui->rotateYMinusButton, &QPushButton::clicked, this, &MainWindow::rotateYBackward);
+    connect(ui->rotateZPlusButton, &QPushButton::clicked, this, &MainWindow::rotateZForward);
+    connect(ui->rotateZMinusButton, &QPushButton::clicked, this, &MainWindow::rotateZBackward);
+
+    connect(ui->translateXPlusButton, &QPushButton::clicked, this, &MainWindow::shiftXForward);
+    connect(ui->translateXMinusButton, &QPushButton::clicked, this, &MainWindow::shiftXBackward);
+    connect(ui->translateYPlusButton, &QPushButton::clicked, this, &MainWindow::shiftYForward);
+    connect(ui->translateYMinusButton, &QPushButton::clicked, this, &MainWindow::shiftYBackward);
+    connect(ui->translateZPlusButton, &QPushButton::clicked, this, &MainWindow::shiftZForward);
+    connect(ui->translateZMinusButton, &QPushButton::clicked, this, &MainWindow::shiftZBackward);
+
+    connect(ui->zoomInButton, &QPushButton::clicked, this, &MainWindow::enlargeScene);
+    connect(ui->zoomOutButton, &QPushButton::clicked, this, &MainWindow::shrinkScene);
 }
 
-void MainWindow::onFileButtonClicked() {
+void MainWindow::chooseCsvFile() {
+    QString filePath = QFileDialog::getOpenFileName(this, "Open CSV File", QString(), "CSV Files (*.csv)");
 
-    if(ui->pathLabel->text().isEmpty())
-        ui->pathLabel->clear();
-    QString filePath = QFileDialog::getOpenFileName(this, "Open CSV File", "D:/labsFiles/2semester/OOP/OOP_lab4/files4labs", "CSV Files (*.csv)");
-    if (filePath.isEmpty()) return;
+    if (filePath.isEmpty())
+        return;
+
     ui->pathLabel->setText(filePath);
 }
 
-void MainWindow::onLoadButtonClicked() {
-    NormalizationParameters params{ui->normBSpinBox->value(), ui->normASpinBox->value(),ui->stepSpinBox->value()};
+void MainWindow::loadCsvScene() {
+    NormalizationParameters params{ui->normBSpinBox->value(), ui->normASpinBox->value(), ui->stepSpinBox->value()};
     std::filesystem::path path = ui->pathLabel->text().toStdString();
+    auto result = facade->loadScene(path, params);
 
-    auto result = facade->LoadScene(path, params);
-
-    if (result.isSuccess() ) {
-        drawScene();
-        QMessageBox::information(this, "Успех", result.getMessage().c_str());
-    }
-    else {
-        QMessageBox::critical(this, "Ошибка", result.getMessage().c_str());
-    }
+    if (result.isSuccess())
+        acceptLoadedScene(result);
+    else
+        showCritical(result);
 }
 
-void MainWindow::drawScene() {
-    clearScene();
-    facade->DrawScene();
+void MainWindow::acceptLoadedScene(const FacadeOperationResult& result) {
+    repaintScene();
+    showInfo(result);
 }
 
-void MainWindow::clearScene() {
+void MainWindow::repaintScene() {
+    eraseScene();
+    facade->drawScene();
+}
+
+void MainWindow::eraseScene() {
     graphicsScene->clear();
 }
 
-void MainWindow::onRotateXPlusClicked(){
-    auto result = facade->RotateScene(Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
+void MainWindow::rotateXForward() {
+    auto result = facade->rotateScene(Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
 
     if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onRotateXMinusClicked() {
-    auto result = facade->RotateScene(-Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onRotateYPlusClicked() {
-    auto result = facade->RotateScene(Constants::DEFAULT_VALUE, Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-void MainWindow::onRotateYMinusClicked() {
-    auto result = facade->RotateScene(Constants::DEFAULT_VALUE, -Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE);
-
-    if(result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onRotateZPlusClicked() {
-    auto result = facade->RotateScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, Constants::UNIT_OF_ROTATION);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onRotateZMinusClicked() {
-    auto result = facade->RotateScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, -Constants::UNIT_OF_ROTATION);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onTranslateXPlusClicked() {
-    auto result = facade->MoveScene(Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onTranslateXMinusClicked() {
-    auto result = facade->MoveScene(-Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка",result.getMessage().c_str());
-}
-
-void MainWindow::onTranslateYPlusClicked() {
-    auto result = facade->MoveScene(Constants::DEFAULT_VALUE, Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onTranslateYMinusClicked() {
-    auto result = facade->MoveScene(Constants::DEFAULT_VALUE, -Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-
-}
-
-void MainWindow::onTranslateZPlusClicked() {
-    auto result = facade->MoveScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, Constants::UNIT_OF_TRANSLATE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onTranslateZMinusClicked() {
-    auto result = facade->MoveScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, -Constants::UNIT_OF_TRANSLATE);
-
-    if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
-}
-
-void MainWindow::onZoomInClicked() {
-    auto result = facade->ScaleScene(Constants::COEFFICIENT_ZOMM_IN,Constants::COEFFICIENT_ZOMM_IN,Constants::COEFFICIENT_ZOMM_IN);
-
-    if (result.isSuccess())
-        drawScene();
+        repaintScene();
     else
-        QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
+        showWarning(result);
 }
 
-void MainWindow::onZoomOutClicked() {
-    auto result = facade->ScaleScene(Constants::COEFFICIENT_ZOMM_OUT,Constants::COEFFICIENT_ZOMM_OUT,Constants::COEFFICIENT_ZOMM_OUT);
+void MainWindow::rotateXBackward() {
+    auto result = facade->rotateScene(-Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
 
     if (result.isSuccess())
-        drawScene();
-    else QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
+        repaintScene();
+    else
+        showWarning(result);
 }
 
-void MainWindow::onExitButtonClicked() {
-    if(graphicsScene)
+void MainWindow::rotateYForward() {
+    auto result = facade->rotateScene(Constants::DEFAULT_VALUE, Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::rotateYBackward() {
+    auto result = facade->rotateScene(Constants::DEFAULT_VALUE, -Constants::UNIT_OF_ROTATION, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::rotateZForward() {
+    auto result = facade->rotateScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, Constants::UNIT_OF_ROTATION);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::rotateZBackward() {
+    auto result = facade->rotateScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, -Constants::UNIT_OF_ROTATION);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftXForward() {
+    auto result = facade->moveScene(Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftXBackward() {
+    auto result = facade->moveScene(-Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftYForward() {
+    auto result = facade->moveScene(Constants::DEFAULT_VALUE, Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftYBackward() {
+    auto result = facade->moveScene(Constants::DEFAULT_VALUE, -Constants::UNIT_OF_TRANSLATE, Constants::DEFAULT_VALUE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftZForward() {
+    auto result = facade->moveScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, Constants::UNIT_OF_TRANSLATE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shiftZBackward() {
+    auto result = facade->moveScene(Constants::DEFAULT_VALUE, Constants::DEFAULT_VALUE, -Constants::UNIT_OF_TRANSLATE);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::enlargeScene() {
+    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOMM_IN,
+                                     Constants::COEFFICIENT_ZOMM_IN,
+                                     Constants::COEFFICIENT_ZOMM_IN);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::shrinkScene() {
+    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOMM_OUT,
+                                     Constants::COEFFICIENT_ZOMM_OUT,
+                                     Constants::COEFFICIENT_ZOMM_OUT);
+
+    if (result.isSuccess())
+        repaintScene();
+    else
+        showWarning(result);
+}
+
+void MainWindow::closeWindow() {
+    if (graphicsScene)
         graphicsScene->clear();
+
     qApp->exit();
 }
 
+void MainWindow::showInfo(const FacadeOperationResult& result) {
+    QMessageBox::information(this, "Успех", result.getMessage().c_str());
+}
+
+void MainWindow::showCritical(const FacadeOperationResult& result) {
+    QMessageBox::critical(this, "Ошибка", result.getMessage().c_str());
+}
+
+void MainWindow::showWarning(const FacadeOperationResult& result) {
+    QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
+}

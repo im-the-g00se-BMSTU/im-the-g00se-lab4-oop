@@ -4,14 +4,12 @@
 #include "scene.h"
 #include "normalizationparameters.h"
 #include <filesystem>
-#include <iostream>
-#include <fstream>
-#include <string.h>
+#include <memory>
 
 class BaseFileReader {
 public:
     virtual ~BaseFileReader() = default;
-    virtual std::unique_ptr<Scene> ReadScene(std::filesystem::path path, NormalizationParameters params) = 0;
+    virtual std::unique_ptr<Scene> readScene(std::filesystem::path path, NormalizationParameters params) = 0;
 };
 
 #endif // BASEFILEREADER_H

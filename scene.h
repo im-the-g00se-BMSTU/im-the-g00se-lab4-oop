@@ -1,15 +1,24 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <filesystem>
+#include <memory>
+#include <vector>
+
 #include "figure.h"
-#include "filesystem"
 
 class Scene {
 private:
     std::vector<std::shared_ptr<Figure>> figures;
 public:
-    std::vector<std::shared_ptr<Figure>>& getFigures();
-    void TranformFigures(TransformMatrix& transforMatrix);
+    std::vector<std::shared_ptr<Figure>>& getFigures() {
+        return figures;
+    }
+
+    void transformFigures(TransformMatrix& transformMatrix) {
+        for (auto& figure : figures)
+            figure->transform(transformMatrix);
+    }
 };
 
 #endif // SCENE_H

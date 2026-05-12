@@ -4,7 +4,7 @@
 class Point3D {
 public:
     float x, y, z;
-    Point3D(float cordX, float cordY, float cordZ);
+    Point3D(float cordX, float cordY, float cordZ) : x(cordX), y(cordY), z(cordZ) {}
 };
 
 #endif // POINT3D_H

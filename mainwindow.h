@@ -3,7 +3,14 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QApplication>
+#include <QFileDialog>
+#include <QMessageBox>
+
 #include "facade.h"
+#include "ui_mainwindow.h"
+#include "file_reader.h"
+#include "qt_scene_drawer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,33 +24,36 @@ public:
     ~MainWindow();
 
 private slots:
-    void onFileButtonClicked();
-    void onLoadButtonClicked();
-    void onExitButtonClicked();
-    void onRotateXPlusClicked();
-    void onRotateXMinusClicked();
-    void onRotateYPlusClicked();
-    void onRotateYMinusClicked();
-    void onRotateZPlusClicked();
-    void onRotateZMinusClicked();
-    void onTranslateXPlusClicked();
-    void onTranslateXMinusClicked();
-    void onTranslateYPlusClicked();
-    void onTranslateYMinusClicked();
-    void onTranslateZPlusClicked();
-    void onTranslateZMinusClicked();
-    void onZoomInClicked();
-    void onZoomOutClicked();
+    void chooseCsvFile();
+    void loadCsvScene();
+    void closeWindow();
+    void rotateXForward();
+    void rotateXBackward();
+    void rotateYForward();
+    void rotateYBackward();
+    void rotateZForward();
+    void rotateZBackward();
+    void shiftXForward();
+    void shiftXBackward();
+    void shiftYForward();
+    void shiftYBackward();
+    void shiftZForward();
+    void shiftZBackward();
+    void enlargeScene();
+    void shrinkScene();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene* graphicsScene;
     std::unique_ptr<Facade> facade;
 
-    void setupConnections();
-    void drawScene();
-    void DrawAxes();
-    void clearScene();
+    void bindControls();
+    void repaintScene();
+    void eraseScene();
+    void acceptLoadedScene(const FacadeOperationResult& result);
+    void showInfo(const FacadeOperationResult& result);
+    void showCritical(const FacadeOperationResult& result);
+    void showWarning(const FacadeOperationResult& result);
 };
 
 #endif // MAINWINDOW_H

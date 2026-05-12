@@ -1,18 +1,24 @@
 #ifndef QTSCENEDRAWER_H
 #define QTSCENEDRAWER_H
 
-#include "scenedrawerbase.h"
 #include <QGraphicsScene>
+#include <QPen>
+#include <QColor>
+
+#include "scene_drawer_base.h"
+#include "figure.h"
+#include "edge.h"
+#include "vertex.h"
 
 class QtSceneDrawer: public SceneDrawerBase {
 private:
     QGraphicsScene* qScene;
-    void drawLine(Vertex& vert1, Vertex& vert2);
+    void paintSegment(Vertex& vert1, Vertex& vert2);
 public:
     explicit QtSceneDrawer(QGraphicsScene* scene);
-    void DrawScene(Scene& scene) override;
+    void drawScene(Scene& scene) override;
     void clear() override;
-    void DrawAxes(float axisLength);
+    void drawAxes(float axisLength);
 };
 
 #endif // QTSCENEDRAWER_
