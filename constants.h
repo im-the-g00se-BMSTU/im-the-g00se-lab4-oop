@@ -15,8 +15,8 @@ namespace Constants {
     constexpr float DEFAULT_SCALE = 1.0;
     constexpr float MIN_SCALE = 0.1;
     constexpr float MAX_SCALE = 16.0;
-    constexpr float COEFFICIENT_ZOMM_IN = 1.2;
-    constexpr float COEFFICIENT_ZOMM_OUT = 0.9;
+    constexpr float COEFFICIENT_ZOOM_IN = 1.2;
+    constexpr float COEFFICIENT_ZOOM_OUT = 0.9;
 }
 
 #endif // CONSTANTS_H

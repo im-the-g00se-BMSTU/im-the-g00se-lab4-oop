@@ -26,7 +26,6 @@ public:
 private slots:
     void chooseCsvFile();
     void loadCsvScene();
-    void closeWindow();
     void rotateXForward();
     void rotateXBackward();
     void rotateYForward();
@@ -49,8 +48,6 @@ private:
 
     void bindControls();
     void repaintScene();
-    void eraseScene();
-    void acceptLoadedScene(const FacadeOperationResult& result);
     void showInfo(const FacadeOperationResult& result);
     void showCritical(const FacadeOperationResult& result);
     void showWarning(const FacadeOperationResult& result);

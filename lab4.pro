@@ -19,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     base_file_reader.h \
+    constants.h \
     edge.h \
     facade.h \
     facade_operation_result.h \
@@ -42,3 +43,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc

@@ -20,7 +20,6 @@ MainWindow::~MainWindow() {
 void MainWindow::bindControls() {
     connect(ui->filePushButton, &QPushButton::clicked, this, &MainWindow::chooseCsvFile);
     connect(ui->uploadPushButton, &QPushButton::clicked, this, &MainWindow::loadCsvScene);
-    connect(ui->exitButton, &QPushButton::clicked, this, &MainWindow::closeWindow);
 
     connect(ui->rotateXPlusButton, &QPushButton::clicked, this, &MainWindow::rotateXForward);
     connect(ui->rotateXMinusButton, &QPushButton::clicked, this, &MainWindow::rotateXBackward);
@@ -41,37 +40,36 @@ void MainWindow::bindControls() {
 }
 
 void MainWindow::chooseCsvFile() {
-    QString filePath = QFileDialog::getOpenFileName(this, "Open CSV File", QString(), "CSV Files (*.csv)");
+    QString filePath = QFileDialog::getOpenFileName(this,
+                                                    "Open CSV File",
+                                                    "C:/Users/User/Documents/Qt/OOP/module2/lab4/sample_csv",
+                                                    "CSV Files (*.csv)");
 
     if (filePath.isEmpty())
         return;
 
-    ui->pathLabel->setText(filePath);
+    QString fileName = filePath.section('/', -1);
+    ui->pathLabel->setText(fileName);
+    ui->pathLabel->setToolTip(filePath);
 }
 
 void MainWindow::loadCsvScene() {
     NormalizationParameters params{ui->normBSpinBox->value(), ui->normASpinBox->value(), ui->stepSpinBox->value()};
-    std::filesystem::path path = ui->pathLabel->text().toStdString();
+    std::filesystem::path path = ui->pathLabel->toolTip().toStdString();
     auto result = facade->loadScene(path, params);
 
-    if (result.isSuccess())
-        acceptLoadedScene(result);
-    else
+    if (!result.isSuccess())
         showCritical(result);
-}
+    else {
+        repaintScene();
+        showInfo(result);
+    }
 
-void MainWindow::acceptLoadedScene(const FacadeOperationResult& result) {
-    repaintScene();
-    showInfo(result);
 }
 
 void MainWindow::repaintScene() {
-    eraseScene();
-    facade->drawScene();
-}
-
-void MainWindow::eraseScene() {
     graphicsScene->clear();
+    facade->drawScene();
 }
 
 void MainWindow::rotateXForward() {
@@ -183,9 +181,9 @@ void MainWindow::shiftZBackward() {
 }
 
 void MainWindow::enlargeScene() {
-    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOMM_IN,
-                                     Constants::COEFFICIENT_ZOMM_IN,
-                                     Constants::COEFFICIENT_ZOMM_IN);
+    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOOM_IN,
+                                     Constants::COEFFICIENT_ZOOM_IN,
+                                     Constants::COEFFICIENT_ZOOM_IN);
 
     if (result.isSuccess())
         repaintScene();
@@ -194,21 +192,14 @@ void MainWindow::enlargeScene() {
 }
 
 void MainWindow::shrinkScene() {
-    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOMM_OUT,
-                                     Constants::COEFFICIENT_ZOMM_OUT,
-                                     Constants::COEFFICIENT_ZOMM_OUT);
+    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOOM_OUT,
+                                     Constants::COEFFICIENT_ZOOM_OUT,
+                                     Constants::COEFFICIENT_ZOOM_OUT);
 
     if (result.isSuccess())
         repaintScene();
     else
         showWarning(result);
-}
-
-void MainWindow::closeWindow() {
-    if (graphicsScene)
-        graphicsScene->clear();
-
-    qApp->exit();
 }
 
 void MainWindow::showInfo(const FacadeOperationResult& result) {

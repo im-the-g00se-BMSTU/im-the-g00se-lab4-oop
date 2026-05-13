@@ -14,17 +14,48 @@ public:
         translationLimit,
         scaleLimit
     };
-    FacadeOperationResult(OperationResult result, std::string errorMessage);
-    bool isSuccess() const;
-    OperationResult getResult() const;
-    std::string getMessage() const;
-    static FacadeOperationResult drawError();
-    static FacadeOperationResult success();
-    static FacadeOperationResult invalidFile();
-    static FacadeOperationResult invalidData();
-    static FacadeOperationResult invalidParams();
-    static FacadeOperationResult translationLimit();
-    static FacadeOperationResult scaleLimit();
+
+    FacadeOperationResult(OperationResult result, std::string errorMessage) : result(result), message(errorMessage) {}
+
+    bool isSuccess() const {
+        return result == OperationResult::success;
+    }
+
+    OperationResult getResult() const {
+        return result;
+    }
+
+    std::string getMessage() const {
+        return message;
+    }
+
+    static FacadeOperationResult drawError() {
+        return FacadeOperationResult(OperationResult::drawError, "Ошибка при отрисовке сцены");
+    }
+
+    static FacadeOperationResult success() {
+        return FacadeOperationResult(OperationResult::success, "Успешно");
+    }
+
+    static FacadeOperationResult invalidFile() {
+        return FacadeOperationResult(OperationResult::invalidFile, "Ошибка при чтении файла");
+    }
+
+    static FacadeOperationResult invalidData() {
+        return FacadeOperationResult(OperationResult::invalidData, "Ошибка при чтении данных");
+    }
+
+    static FacadeOperationResult invalidParams() {
+        return FacadeOperationResult(OperationResult::invalidParams, "Некорректные параметры загрузки");
+    }
+
+    static FacadeOperationResult translationLimit() {
+        return FacadeOperationResult(OperationResult::translationLimit, "Достигнут предел сдвига");
+    }
+
+    static FacadeOperationResult scaleLimit() {
+        return FacadeOperationResult(OperationResult::scaleLimit, "Достигнут предел масштабирования");
+    }
 private:
     OperationResult result;
     std::string message;

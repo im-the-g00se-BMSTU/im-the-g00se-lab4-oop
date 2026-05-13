@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -6,850 +6,881 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>855</height>
+    <width>752</width>
+    <height>787</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Main Window</string>
+   <string>3D visualization</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/icons/assets/3d.svg</normaloff>:/icons/assets/3d.svg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
-    background-color: #2D3848;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #111111;
+	color: #f2f2f2;
+}
+
+QGroupBox {
+    border: 1px solid #2f2f2f;
+    border-radius: 6px;
+    margin-top: 18px;
+    padding: 8px 6px 6px 6px;
+    color: #f2f2f2;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+	top: 10px;
+    padding: 0 6px;
+    color: #ffffff;
+}
+QLabel#pathLabel {
+    border: 1px solid #2f2f2f;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 7px 9px;
+}
+QPushButton {
+    background-color: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    color: #f2f2f2;
+    min-height: 28px;
+    padding: 5px 10px;
+}
+QPushButton:hover {
+    background-color: #333333;
+    border-color: #4a4a4a;
+}
+QPushButton:pressed {
+    background-color: #1f1f1f;
+}
+
+QPushButton#uploadPushButton {
+    background-color: #1f66d1;
+    border-color: #2674e8;
+    min-height: 34px;
+}
+
+QPushButton#uploadPushButton:hover {
+    background-color: #2674e8;
+}
+
+QDoubleSpinBox {
+    background-color: #252525;
+    border: 1px solid #303030;
+    border-radius: 4px;
+    color: #ffffff;
+    min-height: 28px;
+    padding: 4px 30px 4px 8px;
+    selection-background-color: #1f66d1;
+}
+QDoubleSpinBox:hover {
+    border-color: #4a4a4a;
+}
+QDoubleSpinBox::up-button,
+QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 22px;
+    right: 3px;
+    background-color: #303030;
+    border-left: 1px solid #3d3d3d;
+}
+QDoubleSpinBox::up-button {
+    subcontrol-position: top right;
+    top: 3px;
+    border-top-right-radius: 3px;
+}
+QDoubleSpinBox::down-button {
+    subcontrol-position: bottom right;
+    bottom: 3px;
+    border-bottom-right-radius: 3px;
+}
+QDoubleSpinBox::up-button:hover,
+QDoubleSpinBox::down-button:hover {
+    background-color: #3a3a3a;
+}
+QDoubleSpinBox::up-button:pressed,
+QDoubleSpinBox::down-button:pressed {
+    background-color: #1f66d1;
+}
+
+QDoubleSpinBox::up-arrow {
+    image: url(:/icons/assets/arrow_drop_up.svg);
+}
+QDoubleSpinBox::down-arrow {
+    image: url(:/icons/assets/arrow_drop_down.svg);
+}
+
+QGraphicsView#graphicsView {
+    border: 1px solid #2b2b2b;
+    background-color: #111111;
+    border-radius: 6px;
+}
+QToolTip {
+    background-color: #252525;
+    border: 1px solid #3a3a3a;
+    color: #ffffff;
+    padding: 4px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="styleSheet">
-    <string notr="true">QWidget#centralwidget {
-   background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #1A2A3A, stop:1 #2D3848);
-}
-</string>
-   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>20</number>
+    </property>
+    <property name="topMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
     <item>
      <widget class="QGraphicsView" name="graphicsView">
       <property name="minimumSize">
        <size>
-        <width>600</width>
+        <width>400</width>
         <height>400</height>
        </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true">QGraphicsView {
-    background-color: #1E2B38;
-    border: 1px solid #3A4A5D;
-    border-radius: 4px;
-}
-
-QGraphicsView QScrollBar:vertical {
-    background: #2C3E50;
-    width: 10px;
-    margin: 0px;
-}
-
-QGraphicsView QScrollBar::handle:vertical {
-    background: #4A5D6E;
-    min-height: 20px;
-    border-radius: 4px;
-}</string>
+      <property name="font">
+       <font>
+        <family>Nunito</family>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Wireframe 3D surface viewport</string>
       </property>
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QLabel" name="pathLabel">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
+     <widget class="QWidget" name="transformWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,2,1">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="moveGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Move</string>
+         </property>
+         <layout class="QGridLayout" name="moveLayout">
+          <property name="spacing">
+           <number>8</number>
           </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-    color: #E0E0E0;
-    font-size: 13px;
-    padding: 5px;
-}
-
-QLabel#pathLabel {
-    background-color: rgba(44, 62, 80, 150);
-    border: 1px solid #3A4A5D;
-    border-radius: 3px;
-}</string>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="translateZPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene closer along the Z axis</string>
+            </property>
+            <property name="text">
+             <string>closer</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="translateZMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene farther along the Z axis</string>
+            </property>
+            <property name="text">
+             <string>farther</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="translateYMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene down along the Y axis</string>
+            </property>
+            <property name="text">
+             <string>↓</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="translateXPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene right along the X axis</string>
+            </property>
+            <property name="text">
+             <string>→</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="translateXMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene left along the X axis</string>
+            </property>
+            <property name="text">
+             <string>←</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="translateYPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Move the scene up along the Y axis</string>
+            </property>
+            <property name="text">
+             <string>↑</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="rotationGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Rotate</string>
+         </property>
+         <layout class="QGridLayout" name="rotationLayout">
+          <property name="spacing">
+           <number>8</number>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignCenter</set>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="rotateXMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene backward around the X axis</string>
+            </property>
+            <property name="text">
+             <string>X -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="rotateYMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene backward around the Y axis</string>
+            </property>
+            <property name="text">
+             <string>Y -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="rotateXPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene forward around the X axis</string>
+            </property>
+            <property name="text">
+             <string>X +</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="rotateYPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene forward around the Y axis</string>
+            </property>
+            <property name="text">
+             <string>Y +</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="rotateZMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene backward around the Z axis</string>
+            </property>
+            <property name="text">
+             <string>Z -</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="rotateZPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Rotate the scene forward around the Z axis</string>
+            </property>
+            <property name="text">
+             <string>Z +</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="scaleGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Scale</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="spacing">
+           <number>8</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="zoomInButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Increase the scene scale</string>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="zoomOutButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Decrease the scene scale</string>
+            </property>
+            <property name="text">
+             <string>−</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="fileworkWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="2,2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="fileGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>File</string>
+         </property>
+         <layout class="QVBoxLayout" name="fileLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
           <item>
            <widget class="QPushButton" name="filePushButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Choose a CSV file containing a matrix of function values</string>
+            </property>
+            <property name="text">
+             <string>Choose file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="pathLabel">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>0</height>
+              <height>34</height>
              </size>
             </property>
             <property name="font">
              <font>
-              <bold>true</bold>
+              <family>Nunito</family>
+              <pointsize>10</pointsize>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-     background-color: #2980B9;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
+            <property name="toolTip">
+             <string>The selected CSV file name will be shown here</string>
             </property>
             <property name="text">
-             <string>Выбрать файл</string>
+             <string>No file was chosen</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="uploadPushButton">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="font">
              <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
               <bold>true</bold>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton {
-     background-color: #2980B9;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Load the selected file and build the wireframe surface</string>
             </property>
             <property name="text">
-             <string>Загрузить данные</string>
+             <string>Upload data</string>
             </property>
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="normalizationGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>400</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Nunito</family>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Normalization: the Z-value range after scaling the data</string>
+         </property>
+         <property name="title">
+          <string>Normalization and step</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="spacing">
+           <number>8</number>
           </property>
-          <property name="styleSheet">
-           <string notr="true">QGroupBox {
-    border: 1px solid #3A4A5D;
-    border-radius: 4px;
-    margin-top: 10px;
-    padding-top: 15px;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    left: 10px;
-    padding: 0 5px;
-    color: #E0E0E0;
-    font-weight: bold;
-}</string>
-          </property>
-          <property name="title">
-           <string>Нормировка</string>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QDoubleSpinBox" name="normASpinBox">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QDoubleSpinBox, QSpinBox {
-    background-color: #2C3E50;
-    border: 1px solid #3A4A5D;
-    border-radius: 3px;
-    color: #E0E0E0;
-    padding: 5px;
-}
-
-QDoubleSpinBox:hover, QSpinBox:hover {
-    border-color: #4A5D6E;
-}
-
-QDoubleSpinBox::up-button, QSpinBox::up-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}
-
-QDoubleSpinBox::down-button, QSpinBox::down-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}</string>
-             </property>
-             <property name="minimum">
-              <double>-1000000.000000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>1000000.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>0.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="font">
-              <font>
-               <pointsize>-1</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QLabel {
-    color: #E0E0E0;
-    font-size: 13px;
-    padding: 5px;
-}</string>
-             </property>
-             <property name="text">
-              <string>до</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="normBSpinBox">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QDoubleSpinBox, QSpinBox {
-    background-color: #2C3E50;
-    border: 1px solid #3A4A5D;
-    border-radius: 3px;
-    color: #E0E0E0;
-    padding: 5px;
-}
-
-QDoubleSpinBox:hover, QSpinBox:hover {
-    border-color: #4A5D6E;
-}
-
-QDoubleSpinBox::up-button, QSpinBox::up-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}
-
-QDoubleSpinBox::down-button, QSpinBox::down-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}</string>
-             </property>
-             <property name="minimum">
-              <double>-1000000.000000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>1000000.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>1.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QGroupBox {
-    border: 1px solid #3A4A5D;
-    border-radius: 4px;
-    margin-top: 10px;
-    padding-top: 15px;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    left: 10px;
-    padding: 0 5px;
-    color: #E0E0E0;
-    font-weight: bold;
-}</string>
-          </property>
-          <property name="title">
-           <string>Шаг точек</string>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QDoubleSpinBox" name="stepSpinBox">
-             <property name="font">
-              <font>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QDoubleSpinBox, QSpinBox {
-    background-color: #2C3E50;
-    border: 1px solid #3A4A5D;
-    border-radius: 3px;
-    color: #E0E0E0;
-    padding: 5px;
-}
-
-QDoubleSpinBox:hover, QSpinBox:hover {
-    border-color: #4A5D6E;
-}
-
-QDoubleSpinBox::up-button, QSpinBox::up-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}
-
-QDoubleSpinBox::down-button, QSpinBox::down-button {
-    width: 16px;
-    subcontrol-origin: border;
-    left: -2px;
-}</string>
-             </property>
-             <property name="minimum">
-              <double>1.000000000000000</double>
-             </property>
-             <property name="maximum">
-              <double>100.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>1.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="1">
-         <widget class="QPushButton" name="rotateZMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот Z-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="rotateYPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот Y+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QPushButton" name="translateZMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг Z-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2" colspan="2">
-         <widget class="QPushButton" name="zoomInButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-     background-color: #2980B9;;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Увеличить</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="rotateZPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот Z+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="translateZPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг Z+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" colspan="2">
-         <widget class="QPushButton" name="zoomOutButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-     background-color: #2980B9;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Уменьшить</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="translateXMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг X-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="translateYMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг Y-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="rotateYMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот Y-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="rotateXMinusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот X-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="translateYPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг Y+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="rotateXPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Поворот X+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="translateXPlusButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #3A4A5D;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Сдвиг X+</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0" colspan="4">
-         <widget class="QPushButton" name="exitButton">
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #E74C3C;
-    border-color: #C0392B;
-    border: 1px solid #4A5D6E;
-    border-radius: 4px;
-    color: #E0E0E0;
-    padding: 6px 12px;
-}
-
-QPushButton:hover {
-    background-color: #4A5D6E;
-    border-color: #5B6E80;
-}
-
-QPushButton:pressed {
-    background-color: #2C3E50;
-    padding: 7px 11px 5px 13px;
-}</string>
-          </property>
-          <property name="text">
-           <string>Выход</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+          <item row="2" column="0">
+           <widget class="QLabel" name="normToLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>To</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" rowspan="2">
+           <widget class="QDoubleSpinBox" name="normBSpinBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>38</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Maximum value of the normalization range</string>
+            </property>
+            <property name="minimum">
+             <double>-1000000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>1000000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="normASpinBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>38</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Minimum value of the normalization range</string>
+            </property>
+            <property name="minimum">
+             <double>-1000000.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>1000000.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" rowspan="2">
+           <widget class="QLabel" name="normToLabel_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Step</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QDoubleSpinBox" name="stepSpinBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>38</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Higher step values sample fewer points from the CSV file</string>
+            </property>
+            <property name="decimals">
+             <number>0</number>
+            </property>
+            <property name="minimum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>100.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="normFromLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>From</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>
