@@ -7,10 +7,11 @@ namespace Constants {
     constexpr char SEPARATOR = ',';
     constexpr float DEFAULT_VALUE  = 0.0;
     constexpr float COEFFICIENT_PROJECTION_Z = 0.5;
+    constexpr float SCENE_RECT_SIZE = 1000;
 
-    constexpr float LINE_WIDTH = 1.5;
+    constexpr float LINE_WIDTH = 1.0;
     constexpr float AXIS_WIDTH = 2;
-    constexpr float AXIS_LENGTH = 300;
+    constexpr float AXIS_LENGTH = 200;
 
     constexpr float UNIT_OF_ROTATION = 30.0;
     constexpr float UNIT_OF_TRANSLATE = 20.0;

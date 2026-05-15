@@ -23,7 +23,7 @@ void QtSceneDrawer::drawScene(Scene& scene) {
 }
 
 void QtSceneDrawer::paintSegment(Vertex& vert1, Vertex& vert2) {
-    QPen pen(QColor(100, 200, 255));
+    QPen pen(QColor(0, 230, 0));
     pen.setWidthF(Constants::LINE_WIDTH);
     QPointF begin = projectPoint(vert1.getPosition());
     QPointF end = projectPoint(vert2.getPosition());
@@ -43,7 +43,7 @@ void QtSceneDrawer::drawAxes(float axisLength) {
     xPen.setWidthF(Constants::AXIS_WIDTH);
     qScene->addLine(origin.x(), origin.y(), xEnd.x(), xEnd.y(), xPen);
 
-    QPen yPen(Qt::green);
+    QPen yPen(Qt::yellow);
     yPen.setWidthF(Constants::AXIS_WIDTH);
     qScene->addLine(origin.x(), origin.y(), yEnd.x(), yEnd.y(), yPen);
 

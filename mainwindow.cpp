@@ -5,6 +5,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->graphicsView->setScene(graphicsScene);
+    graphicsScene->setSceneRect(-Constants::SCENE_RECT_SIZE / 2,
+                                -Constants::SCENE_RECT_SIZE / 2,
+                                Constants::SCENE_RECT_SIZE,
+                                Constants::SCENE_RECT_SIZE);
     touchpadController = std::make_unique<TouchpadSceneController>(ui->graphicsView, this);
 
     auto reader = std::make_unique<FileReader>();
@@ -201,13 +205,13 @@ void MainWindow::shrinkScene() {
 }
 
 void MainWindow::showInfo(const FacadeOperationResult& result) {
-    QMessageBox::information(this, "Успех", result.getMessage().c_str());
+    QMessageBox::information(this, "Success", result.getMessage().c_str());
 }
 
 void MainWindow::showCritical(const FacadeOperationResult& result) {
-    QMessageBox::critical(this, "Ошибка", result.getMessage().c_str());
+    QMessageBox::critical(this, "Error", result.getMessage().c_str());
 }
 
 void MainWindow::showWarning(const FacadeOperationResult& result) {
-    QMessageBox::warning(this, "Внимание", result.getMessage().c_str());
+    QMessageBox::warning(this, "Warning", result.getMessage().c_str());
 }

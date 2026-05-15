@@ -30,31 +30,31 @@ public:
     }
 
     static FacadeOperationResult drawError() {
-        return FacadeOperationResult(OperationResult::drawError, "Ошибка при отрисовке сцены");
+        return FacadeOperationResult(OperationResult::drawError, "Scene rendering error");
     }
 
     static FacadeOperationResult success() {
-        return FacadeOperationResult(OperationResult::success, "Успех");
+        return FacadeOperationResult(OperationResult::success, "Success");
     }
 
     static FacadeOperationResult invalidFile() {
-        return FacadeOperationResult(OperationResult::invalidFile, "Ошибка при чтении файла");
+        return FacadeOperationResult(OperationResult::invalidFile, "File reading error");
     }
 
     static FacadeOperationResult invalidData() {
-        return FacadeOperationResult(OperationResult::invalidData, "Ошибка при чтении данных");
+        return FacadeOperationResult(OperationResult::invalidData, "Data reading error");
     }
 
     static FacadeOperationResult invalidParams() {
-        return FacadeOperationResult(OperationResult::invalidParams, "Некорректные параметры загрузки");
+        return FacadeOperationResult(OperationResult::invalidParams, "Invalid loading parameters");
     }
 
     static FacadeOperationResult translationLimit() {
-        return FacadeOperationResult(OperationResult::translationLimit, "Достигнут предел сдвига");
+        return FacadeOperationResult(OperationResult::translationLimit, "Translation limit reached");
     }
 
     static FacadeOperationResult scaleLimit() {
-        return FacadeOperationResult(OperationResult::scaleLimit, "Достигнут предел масштабирования");
+        return FacadeOperationResult(OperationResult::scaleLimit, "Scale limit reached");
     }
 private:
     OperationResult result;
