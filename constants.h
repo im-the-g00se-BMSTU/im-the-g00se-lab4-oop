@@ -6,8 +6,9 @@ namespace Constants {
     constexpr double PI = 3.141592653589793;
     constexpr char SEPARATOR = ',';
     constexpr float DEFAULT_VALUE  = 0.0;
-    constexpr float LINE_WIDTH = 1.5;
+    constexpr float COEFFICIENT_PROJECTION_Z = 0.5;
 
+    constexpr float LINE_WIDTH = 1.5;
     constexpr float AXIS_WIDTH = 2;
     constexpr float AXIS_LENGTH = 300;
 

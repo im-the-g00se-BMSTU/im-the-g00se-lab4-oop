@@ -41,8 +41,10 @@ bool TouchpadSceneController::handleWheelEvent(QWheelEvent* event) {
 
         if (delta.isNull())
             isHandled = false;
-        else
-            panBy(delta);
+        else {
+            view->horizontalScrollBar()->setValue(view->horizontalScrollBar()->value() - delta.x());
+            view->verticalScrollBar()->setValue(view->verticalScrollBar()->value() - delta.y());
+        }
     }
 
     if (isHandled)
@@ -69,21 +71,11 @@ bool TouchpadSceneController::handleNativeGesture(QNativeGestureEvent* event) {
     return isHandled;
 }
 
-void TouchpadSceneController::panBy(const QPoint& delta) {
-    view->horizontalScrollBar()->setValue(view->horizontalScrollBar()->value() - delta.x());
-    view->verticalScrollBar()->setValue(view->verticalScrollBar()->value() - delta.y());
-}
-
 void TouchpadSceneController::zoomBy(double factor) {
-    double nextZoom = clampZoom(currentZoom * factor);
+    double nextZoom = std::max(Constants::MIN_ZOOM, std::min(Constants::MAX_ZOOM, currentZoom * factor));
     double appliedFactor = nextZoom / currentZoom;
     currentZoom = nextZoom;
     view->scale(appliedFactor, appliedFactor);
-}
-
-double TouchpadSceneController::clampZoom(double zoom) const {
-    double clampedZoom = std::max(Constants::MIN_ZOOM, std::min(Constants::MAX_ZOOM, zoom));
-    return clampedZoom;
 }
 
 double TouchpadSceneController::wheelZoomFactor(const QWheelEvent* event) const {
@@ -92,6 +84,5 @@ double TouchpadSceneController::wheelZoomFactor(const QWheelEvent* event) const 
     if (units == 0)
         units = event->pixelDelta().y();
 
-    double factor = std::pow(1.0 + Constants::WHEEL_ZOOM_STEP, units);
-    return factor;
+    return std::pow(1.0 + Constants::WHEEL_ZOOM_STEP, units);
 }

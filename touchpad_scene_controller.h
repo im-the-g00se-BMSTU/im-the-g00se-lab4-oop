@@ -25,9 +25,7 @@ private:
 
     bool handleWheelEvent(QWheelEvent* event);
     bool handleNativeGesture(QNativeGestureEvent* event);
-    void panBy(const QPoint& delta);
     void zoomBy(double factor);
-    double clampZoom(double zoom) const;
     double wheelZoomFactor(const QWheelEvent* event) const;
 };
 
