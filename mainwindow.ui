@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
-    <normaloff>:/icons/assets/3d.svg</normaloff>:/icons/assets/3d.svg</iconset>
+    <normaloff>:/assets/Codesandbox.svg</normaloff>:/assets/Codesandbox.svg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
@@ -122,10 +122,10 @@ QDoubleSpinBox::down-button:pressed {
 }
 
 QDoubleSpinBox::up-arrow {
-    image: url(:/icons/assets/arrow_drop_up.svg);
+    image: url(:/assets/arrow_drop_up.svg);
 }
 QDoubleSpinBox::down-arrow {
-    image: url(:/icons/assets/arrow_drop_down.svg);
+    image: url(:/assets/arrow_drop_down.svg);
 }
 
 QGraphicsView#graphicsView {

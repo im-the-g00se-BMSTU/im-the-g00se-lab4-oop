@@ -26,6 +26,7 @@ HEADERS += \
     figure.h \
     file_reader.h \
     normalization_parameters.h \
+    normalization_parameters.h \
     point3d.h \
     qt_scene_drawer.h \
     scene.h \
@@ -46,4 +47,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    res.qrc \
     res.qrc

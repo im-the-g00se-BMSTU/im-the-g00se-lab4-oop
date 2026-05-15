@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/arrow_drop_down.svg</file>
+        <file>assets/arrow_drop_up.svg</file>
+        <file>assets/Codesandbox.svg</file>
+    </qresource>
+</RCC>
