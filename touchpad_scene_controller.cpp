@@ -81,7 +81,7 @@ void TouchpadSceneController::zoomBy(double factor) {
 double TouchpadSceneController::wheelZoomFactor(const QWheelEvent* event) const {
     int units = event->angleDelta().y();
 
-    if (units == 0)
+    if (!units)
         units = event->pixelDelta().y();
 
     return std::pow(1.0 + Constants::WHEEL_ZOOM_STEP, units);

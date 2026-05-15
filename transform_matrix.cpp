@@ -1,24 +1,18 @@
 #include "transform_matrix.h"
 
-TransformMatrix::TransformMatrix(float mat[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE]) {
-    for (size_t i = 0; i < Constants::MATRIX_SIZE; i++)
-        for (size_t j = 0; j < Constants::MATRIX_SIZE; j++)
-            matrix[i][j] = mat[i][j];
-}
+TransformMatrix::TransformMatrix(const MatrixData& matrix) : matrix(matrix) {}
 
 TransformMatrix TransformMatrix::operator *(const TransformMatrix& transformMatrix) const {
-    float mat[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE];
+    MatrixData matrixProduct = {};
 
     for (size_t i = 0; i < Constants::MATRIX_SIZE; i++) {
         for (size_t j = 0; j < Constants::MATRIX_SIZE ;j++) {
-            mat[i][j] = 0;
             for (size_t k = 0; k < Constants::MATRIX_SIZE; k++)
-                mat[i][j] += this->matrix[i][k] * (transformMatrix.matrix[k][j]);
+                matrixProduct[i][j] += this->matrix[i][k] * (transformMatrix.matrix[k][j]);
         }
     }
 
-    TransformMatrix newTransformMatrix = mat;
-    return newTransformMatrix;
+    return TransformMatrix(matrixProduct);
 }
 
 Point3D TransformMatrix::transformPoint(const Point3D& point) const {

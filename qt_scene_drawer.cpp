@@ -1,12 +1,11 @@
 #include "qt_scene_drawer.h"
 
 QPointF projectPoint(const Point3D& point) {
-    constexpr float zProjection = 0.5;
-    QPointF projected(point.x + point.z * zProjection, -point.y + point.z * zProjection);
+    QPointF projected(point.x + point.z * Constants::COEFFICIENT_PROJECTION_Z, -point.y + point.z * Constants::COEFFICIENT_PROJECTION_Z);
     return projected;
 }
 
-QtSceneDrawer::QtSceneDrawer(QGraphicsScene* scene) : qScene(scene){}
+QtSceneDrawer::QtSceneDrawer(QGraphicsScene* scene) : qScene(scene) {}
 
 void QtSceneDrawer::drawScene(Scene& scene) {
     if (!qScene)

@@ -1,8 +1,5 @@
 #include "file_reader.h"
 
-namespace {
-using CsvTable = std::vector<std::vector<float>>;
-
 bool readCell(const std::string& rawCell, float& value) {
     size_t parsedSize = 0;
     bool isOk = true;
@@ -16,7 +13,7 @@ bool readCell(const std::string& rawCell, float& value) {
     return isOk && parsedSize == rawCell.find_last_not_of(" \t\r\n") + 1;
 }
 
-bool appendCsvRow(const std::string& line, CsvTable& table) {
+bool appendCsvRow(const std::string& line, std::vector<std::vector<float>>& table) {
     std::stringstream stream(line);
     std::string rawCell;
     std::vector<float> row;
@@ -38,7 +35,7 @@ bool appendCsvRow(const std::string& line, CsvTable& table) {
     return isOk;
 }
 
-bool loadTable(std::ifstream& input, CsvTable& table) {
+bool loadTable(std::ifstream& input, std::vector<std::vector<float>>& table) {
     std::string line;
     bool isOk = true;
 
@@ -52,7 +49,7 @@ bool loadTable(std::ifstream& input, CsvTable& table) {
     return isOk;
 }
 
-bool hasRectangularShape(const CsvTable& table) {
+bool hasRectangularShape(const std::vector<std::vector<float>>& table) {
     bool isRectangular = !table.empty();
     size_t width = 0;
 
@@ -68,7 +65,7 @@ bool hasRectangularShape(const CsvTable& table) {
     return isRectangular;
 }
 
-std::pair<float, float> measureRange(const CsvTable& table) {
+std::pair<float, float> measureRange(const std::vector<std::vector<float>>& table) {
     float minValue = table.front().front();
     float maxValue = minValue;
 
@@ -81,10 +78,6 @@ std::pair<float, float> measureRange(const CsvTable& table) {
     return {minValue, maxValue};
 }
 
-size_t roundedStride(double rawStep) {
-    return static_cast<size_t>(std::lround(rawStep));
-}
-
 float normalizeZ(float value, float sourceMin, float sourceMax, const NormalizationParameters& params) {
     float normalized = static_cast<float>((params.min + params.max) / 2.0);
 
@@ -94,14 +87,14 @@ float normalizeZ(float value, float sourceMin, float sourceMax, const Normalizat
     return normalized;
 }
 
-void makeVertices(const CsvTable& table,
+void makeVertices(const std::vector<std::vector<float>>& table,
                   const NormalizationParameters& params,
                   std::vector<Vertex>& vertices,
                   size_t& rowsCount,
                   size_t& colsCount) {
     const auto [sourceMin, sourceMax] = measureRange(table);
-    const size_t yStride = roundedStride(params.dyStep);
-    const size_t xStride = roundedStride(params.dxStep);
+    const size_t yStride = static_cast<size_t>(std::lround(params.dyStep));
+    const size_t xStride = static_cast<size_t>(std::lround(params.dxStep));
 
     rowsCount = 0;
     colsCount = 0;
@@ -127,7 +120,7 @@ void makeVertices(const CsvTable& table,
 void makeEdges(const std::vector<Vertex>& vertices, size_t rowsCount, size_t colsCount, std::vector<Edge>& edges) {
     for (size_t row = 0; row < rowsCount; row++) {
         for (size_t col = 0; col < colsCount; col++) {
-            const size_t current = row * colsCount + col;
+            size_t current = row * colsCount + col;
 
             if (col + 1 < colsCount)
                 edges.push_back(Edge(vertices[current], vertices[current + 1]));
@@ -137,11 +130,10 @@ void makeEdges(const std::vector<Vertex>& vertices, size_t rowsCount, size_t col
         }
     }
 }
-}
 
 std::unique_ptr<Scene> FileReader::readScene(std::filesystem::path path, NormalizationParameters params) {
     std::ifstream input(path);
-    CsvTable table;
+    std::vector<std::vector<float>> table;
     std::unique_ptr<Scene> scene = nullptr;
 
     if (input.is_open() && loadTable(input, table) && hasRectangularShape(table)) {
@@ -153,7 +145,7 @@ std::unique_ptr<Scene> FileReader::readScene(std::filesystem::path path, Normali
         makeVertices(table, params, vertices, rowsCount, colsCount);
         makeEdges(vertices, rowsCount, colsCount, edges);
 
-        auto figure = std::make_shared<Figure>(vertices, edges);
+        auto figure = std::make_shared<Figure>(edges);
         scene = std::make_unique<Scene>();
         scene->getFigures().push_back(figure);
     }

@@ -7,7 +7,7 @@
 
 class TransformMatrixBuilder {
 public:
-    static TransformMatrix createRotationMatrix(float rotateX, float roateY, float rotateZ);
+    static TransformMatrix createRotationMatrix(float rotateX, float rotateY, float rotateZ);
     static TransformMatrix createScaleMatrix(float scaleX, float scaleY, float scaleZ);
     static TransformMatrix createMoveMatrix(float moveX, float moveY, float moveZ);
 };
