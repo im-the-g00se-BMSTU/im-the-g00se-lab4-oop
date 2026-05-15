@@ -145,9 +145,8 @@ std::unique_ptr<Scene> FileReader::readScene(std::filesystem::path path, Normali
         makeVertices(table, params, vertices, rowsCount, colsCount);
         makeEdges(vertices, rowsCount, colsCount, edges);
 
-        auto figure = std::make_shared<Figure>(edges);
         scene = std::make_unique<Scene>();
-        scene->getFigures().push_back(figure);
+        scene->getFigures().push_back(Figure(edges));
     }
 
     return scene;

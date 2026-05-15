@@ -20,7 +20,7 @@ namespace Constants {
     constexpr double MAX_ZOOM = 20.0;
     constexpr double WHEEL_ZOOM_STEP = 0.0015;
 
-    constexpr float INITIAL_SCALE = 10.0;
+    constexpr float INITIAL_SCALE = 8.0;
     constexpr float INITIAL_X_ROTATION = -90.0;
     constexpr float INITIAL_Y_ROTATION = 0.0;
     constexpr float INITIAL_Z_ROTATION = -90.0;

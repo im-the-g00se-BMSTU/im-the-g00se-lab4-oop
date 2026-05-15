@@ -14,7 +14,7 @@ void QtSceneDrawer::drawScene(Scene& scene) {
     drawAxes(Constants::AXIS_LENGTH);
 
     for (auto& figure : scene.getFigures()) {
-        for (auto& edge : figure->getEdges()) {
+        for (auto& edge : figure.getEdges()) {
             auto& vert1 = edge.getBegin();
             auto& vert2 = edge.getEnd();
             paintSegment(vert1, vert2);
