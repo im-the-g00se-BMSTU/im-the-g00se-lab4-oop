@@ -12,25 +12,26 @@ SOURCES += \
     facade.cpp \
     file_reader.cpp \
     qt_scene_drawer.cpp \
+    touchpad_scene_controller.cpp \
     transform_matrix.cpp \
     transform_matrix_builder.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
-    base_file_reader.h \
     constants.h \
     edge.h \
     facade.h \
     facade_operation_result.h \
     figure.h \
     file_reader.h \
-    normalizationparameters.h \
+    normalization_parameters.h \
     point3d.h \
     qt_scene_drawer.h \
     scene.h \
     scene_drawer_base.h \
     scene_object.h \
+    touchpad_scene_controller.h \
     transform_matrix.h \
     transform_matrix_builder.h \
     vertex.h \

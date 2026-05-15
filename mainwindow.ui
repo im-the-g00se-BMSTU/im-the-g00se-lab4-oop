@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>752</width>
-    <height>787</height>
+    <height>799</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -167,9 +167,6 @@ QToolTip {
         <family>Nunito</family>
        </font>
       </property>
-      <property name="toolTip">
-       <string>Wireframe 3D surface viewport</string>
-      </property>
      </widget>
     </item>
     <item>
@@ -221,81 +218,7 @@ QToolTip {
           <property name="spacing">
            <number>8</number>
           </property>
-          <item row="1" column="3">
-           <widget class="QPushButton" name="translateZPlusButton">
-            <property name="font">
-             <font>
-              <family>Nunito</family>
-              <pointsize>11</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>Move the scene closer along the Z axis</string>
-            </property>
-            <property name="text">
-             <string>closer</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QPushButton" name="translateZMinusButton">
-            <property name="font">
-             <font>
-              <family>Nunito</family>
-              <pointsize>11</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="toolTip">
-             <string>Move the scene farther along the Z axis</string>
-            </property>
-            <property name="text">
-             <string>farther</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="translateYMinusButton">
-            <property name="font">
-             <font>
-              <family>Nunito</family>
-              <pointsize>11</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Move the scene down along the Y axis</string>
-            </property>
-            <property name="text">
-             <string>↓</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="translateXPlusButton">
-            <property name="font">
-             <font>
-              <family>Nunito</family>
-              <pointsize>11</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Move the scene right along the X axis</string>
-            </property>
-            <property name="text">
-             <string>→</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
+          <item row="2" column="0">
            <widget class="QPushButton" name="translateXMinusButton">
             <property name="font">
              <font>
@@ -308,14 +231,34 @@ QToolTip {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
-             <string>Move the scene left along the X axis</string>
+             <string>X-</string>
             </property>
             <property name="text">
              <string>←</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="translateYMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>Y-</string>
+            </property>
+            <property name="text">
+             <string>↓</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
            <widget class="QPushButton" name="translateYPlusButton">
             <property name="font">
              <font>
@@ -328,10 +271,64 @@ QToolTip {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
-             <string>Move the scene up along the Y axis</string>
+             <string>Y+</string>
             </property>
             <property name="text">
              <string>↑</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QPushButton" name="translateXPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip">
+             <string>X+</string>
+            </property>
+            <property name="text">
+             <string>→</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="translateZMinusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Z-</string>
+            </property>
+            <property name="text">
+             <string>farther</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="translateZPlusButton">
+            <property name="font">
+             <font>
+              <family>Nunito</family>
+              <pointsize>11</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Z+</string>
+            </property>
+            <property name="text">
+             <string>closer</string>
             </property>
            </widget>
           </item>
@@ -378,9 +375,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Rotate the scene backward around the X axis</string>
-            </property>
             <property name="text">
              <string>X -</string>
             </property>
@@ -397,9 +391,6 @@ QToolTip {
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Rotate the scene backward around the Y axis</string>
             </property>
             <property name="text">
              <string>Y -</string>
@@ -418,9 +409,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Rotate the scene forward around the X axis</string>
-            </property>
             <property name="text">
              <string>X +</string>
             </property>
@@ -437,9 +425,6 @@ QToolTip {
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Rotate the scene forward around the Y axis</string>
             </property>
             <property name="text">
              <string>Y +</string>
@@ -458,9 +443,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Rotate the scene backward around the Z axis</string>
-            </property>
             <property name="text">
              <string>Z -</string>
             </property>
@@ -477,9 +459,6 @@ QToolTip {
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Rotate the scene forward around the Z axis</string>
             </property>
             <property name="text">
              <string>Z +</string>
@@ -529,9 +508,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Increase the scene scale</string>
-            </property>
             <property name="text">
              <string>+</string>
             </property>
@@ -548,9 +524,6 @@ QToolTip {
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>Decrease the scene scale</string>
             </property>
             <property name="text">
              <string>−</string>
@@ -624,9 +597,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Choose a CSV file containing a matrix of function values</string>
-            </property>
             <property name="text">
              <string>Choose file</string>
             </property>
@@ -647,7 +617,7 @@ QToolTip {
              </font>
             </property>
             <property name="toolTip">
-             <string>The selected CSV file name will be shown here</string>
+             <string>CSV file path will be shown here</string>
             </property>
             <property name="text">
              <string>No file was chosen</string>
@@ -678,9 +648,6 @@ QToolTip {
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
-            <property name="toolTip">
-             <string>Load the selected file and build the wireframe surface</string>
-            </property>
             <property name="text">
              <string>Upload data</string>
             </property>
@@ -709,9 +676,6 @@ QToolTip {
            <pointsize>10</pointsize>
            <bold>true</bold>
           </font>
-         </property>
-         <property name="toolTip">
-          <string>Normalization: the Z-value range after scaling the data</string>
          </property>
          <property name="title">
           <string>Normalization and step</string>
@@ -756,7 +720,7 @@ QToolTip {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
-             <string>Maximum value of the normalization range</string>
+             <string>Maximum normalization range</string>
             </property>
             <property name="minimum">
              <double>-1000000.000000000000000</double>
@@ -786,7 +750,7 @@ QToolTip {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
-             <string>Minimum value of the normalization range</string>
+             <string>Minimum normalization range</string>
             </property>
             <property name="minimum">
              <double>-1000000.000000000000000</double>
@@ -835,7 +799,7 @@ QToolTip {
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
-             <string>Higher step values sample fewer points from the CSV file</string>
+             <string/>
             </property>
             <property name="decimals">
              <number>0</number>

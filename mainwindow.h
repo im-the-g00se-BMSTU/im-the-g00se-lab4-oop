@@ -6,11 +6,13 @@
 #include <QApplication>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <memory>
 
 #include "facade.h"
 #include "ui_mainwindow.h"
 #include "file_reader.h"
 #include "qt_scene_drawer.h"
+#include "touchpad_scene_controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,18 +28,21 @@ public:
 private slots:
     void chooseCsvFile();
     void loadCsvScene();
+
     void rotateXForward();
     void rotateXBackward();
     void rotateYForward();
     void rotateYBackward();
     void rotateZForward();
     void rotateZBackward();
+
     void shiftXForward();
     void shiftXBackward();
     void shiftYForward();
     void shiftYBackward();
     void shiftZForward();
     void shiftZBackward();
+
     void enlargeScene();
     void shrinkScene();
 
@@ -45,6 +50,7 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene* graphicsScene;
     std::unique_ptr<Facade> facade;
+    std::unique_ptr<TouchpadSceneController> touchpadController;
 
     void bindControls();
     void repaintScene();

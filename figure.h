@@ -12,7 +12,7 @@ private:
     std::vector<Vertex> vertices;
     std::vector<Edge> edges;
 public:
-    Figure(std::vector<Vertex>& verts, std::vector<Edge>& edgs) : vertices(verts), edges(edgs) {}
+    Figure(std::vector<Vertex>& verts, std::vector<Edge>& edges) : vertices(verts), edges(edges) {}
 
     std::vector<Vertex>& getVertices() {
         return vertices;

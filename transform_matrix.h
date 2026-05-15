@@ -7,7 +7,7 @@
 
 class TransformMatrix {
 private:
-    float matr[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE];
+    float matrix[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE];
 public:
     TransformMatrix(float mat[Constants::MATRIX_SIZE][Constants::MATRIX_SIZE]);
     TransformMatrix operator*(const TransformMatrix& transformMatrix) const;

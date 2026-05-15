@@ -34,7 +34,7 @@ public:
     }
 
     static FacadeOperationResult success() {
-        return FacadeOperationResult(OperationResult::success, "Успешно");
+        return FacadeOperationResult(OperationResult::success, "Успех");
     }
 
     static FacadeOperationResult invalidFile() {

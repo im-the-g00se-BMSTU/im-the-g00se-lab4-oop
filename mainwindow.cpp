@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->graphicsView->setScene(graphicsScene);
+    touchpadController = std::make_unique<TouchpadSceneController>(ui->graphicsView, this);
 
     auto reader = std::make_unique<FileReader>();
     auto drawer = std::make_unique<QtSceneDrawer>(graphicsScene);
@@ -60,11 +61,8 @@ void MainWindow::loadCsvScene() {
 
     if (!result.isSuccess())
         showCritical(result);
-    else {
+    else
         repaintScene();
-        showInfo(result);
-    }
-
 }
 
 void MainWindow::repaintScene() {
@@ -181,9 +179,9 @@ void MainWindow::shiftZBackward() {
 }
 
 void MainWindow::enlargeScene() {
-    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOOM_IN,
-                                     Constants::COEFFICIENT_ZOOM_IN,
-                                     Constants::COEFFICIENT_ZOOM_IN);
+    auto result = facade->scaleScene(Constants::COEFFICIENT_SCALE_IN,
+                                     Constants::COEFFICIENT_SCALE_IN,
+                                     Constants::COEFFICIENT_SCALE_IN);
 
     if (result.isSuccess())
         repaintScene();
@@ -192,9 +190,9 @@ void MainWindow::enlargeScene() {
 }
 
 void MainWindow::shrinkScene() {
-    auto result = facade->scaleScene(Constants::COEFFICIENT_ZOOM_OUT,
-                                     Constants::COEFFICIENT_ZOOM_OUT,
-                                     Constants::COEFFICIENT_ZOOM_OUT);
+    auto result = facade->scaleScene(Constants::COEFFICIENT_SCALE_OUT,
+                                     Constants::COEFFICIENT_SCALE_OUT,
+                                     Constants::COEFFICIENT_SCALE_OUT);
 
     if (result.isSuccess())
         repaintScene();
@@ -211,5 +209,5 @@ void MainWindow::showCritical(const FacadeOperationResult& result) {
 }
 
 void MainWindow::showWarning(const FacadeOperationResult& result) {
-    QMessageBox::warning(this, "Ошибка", result.getMessage().c_str());
+    QMessageBox::warning(this, "Внимание", result.getMessage().c_str());
 }
