@@ -5,8 +5,8 @@ TouchpadSceneController::TouchpadSceneController(QGraphicsView* controlledView, 
     if (view) {
         view->installEventFilter(this);
         view->viewport()->installEventFilter(this);
-        view->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        view->setResizeAnchor(QGraphicsView::AnchorViewCenter);
+        view->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+        view->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
         view->viewport()->setAttribute(Qt::WA_AcceptTouchEvents);
     }
 }
@@ -28,9 +28,11 @@ bool TouchpadSceneController::eventFilter(QObject* watched, QEvent* event) {
 bool TouchpadSceneController::handleWheelEvent(QWheelEvent* event) {
     bool isHandled = false;
 
-    if ((event->modifiers() & Qt::ControlModifier) != 0)
+    if ((event->modifiers() & Qt::ControlModifier) != 0) {
         zoomBy(wheelZoomFactor(event));
-    else {
+        isHandled = true;
+        event->accept();
+    } else {
         QPoint delta = event->pixelDelta();
 
         if (delta.isNull())
