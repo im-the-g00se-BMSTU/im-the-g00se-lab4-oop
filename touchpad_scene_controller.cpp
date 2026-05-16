@@ -26,7 +26,7 @@ bool TouchpadSceneController::eventFilter(QObject* watched, QEvent* event) {
 }
 
 bool TouchpadSceneController::handleWheelEvent(QWheelEvent* event) {
-    bool isHandled = true;
+    bool isHandled = false;
 
     if ((event->modifiers() & Qt::ControlModifier) != 0)
         zoomBy(wheelZoomFactor(event));
@@ -39,16 +39,13 @@ bool TouchpadSceneController::handleWheelEvent(QWheelEvent* event) {
         if ((event->modifiers() & Qt::ShiftModifier) != 0 && delta.x() == 0)
             delta = QPoint(delta.y(), 0);
 
-        if (delta.isNull())
-            isHandled = false;
-        else {
+        if (!delta.isNull()) {
+            isHandled = true;
             view->horizontalScrollBar()->setValue(view->horizontalScrollBar()->value() - delta.x());
             view->verticalScrollBar()->setValue(view->verticalScrollBar()->value() - delta.y());
+            event->accept();
         }
     }
-
-    if (isHandled)
-        event->accept();
 
     return isHandled;
 }
@@ -62,11 +59,9 @@ bool TouchpadSceneController::handleNativeGesture(QNativeGestureEvent* event) {
         if (factor > 0.0) {
             zoomBy(factor);
             isHandled = true;
+            event->accept();
         }
     }
-
-    if (isHandled)
-        event->accept();
 
     return isHandled;
 }
