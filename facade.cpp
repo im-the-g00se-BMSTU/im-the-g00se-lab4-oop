@@ -21,11 +21,8 @@ FacadeOperationResult Facade::loadScene(std::filesystem::path& path, Normalizati
 
         if (!scene || scene->getFigures().empty())
             result = FacadeOperationResult::invalidFile();
-        else {
-            result = rotateScene(Constants::INITIAL_X_ROTATION, Constants::INITIAL_Y_ROTATION, Constants::INITIAL_Z_ROTATION);
-            if (result.isSuccess())
-                result = scaleScene(Constants::INITIAL_SCALE, Constants::INITIAL_SCALE, Constants::INITIAL_SCALE);
-        }
+        else
+           result = scaleScene(Constants::INITIAL_SCALE, Constants::INITIAL_SCALE, Constants::INITIAL_SCALE);
     }
 
     return result;

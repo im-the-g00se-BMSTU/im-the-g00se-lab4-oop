@@ -6,7 +6,7 @@ namespace Constants {
     constexpr double PI = 3.141592653589793;
     constexpr char SEPARATOR = ',';
     constexpr float DEFAULT_VALUE  = 0.0;
-    constexpr float COEFFICIENT_PROJECTION_Z = 0.5;
+    constexpr float COEFFICIENT_PROJECTION_X = 0.5;
     constexpr float SCENE_RECT_SIZE = 1000;
 
     constexpr float LINE_WIDTH = 1.0;

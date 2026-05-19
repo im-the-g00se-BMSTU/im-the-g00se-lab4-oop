@@ -1,7 +1,8 @@
 #include "qt_scene_drawer.h"
 
 QPointF projectPoint(const Point3D& point) {
-    QPointF projected(point.x + point.z * Constants::COEFFICIENT_PROJECTION_Z, -point.y + point.z * Constants::COEFFICIENT_PROJECTION_Z);
+    QPointF projected(point.y + point.x * Constants::COEFFICIENT_PROJECTION_X,
+                      -point.z + point.x * Constants::COEFFICIENT_PROJECTION_X);
     return projected;
 }
 
